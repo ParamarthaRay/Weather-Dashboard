@@ -1,23 +1,19 @@
 import { useState, useEffect } from "react";
-
 const SearchBar = ({ city, setCity, fetchWeather }) => {
   const [history, setHistory] = useState([]);
   useEffect(() => {
     const savedHistory = JSON.parse(localStorage.getItem("weatherHistory")) || [];
     setHistory(savedHistory);
   }, []);
-
   const handleSearch = () => {
     if (!city.trim()) return; 
     fetchWeather();
     const updatedHistory = [city, ...history].filter(
       (c, index, self) => self.indexOf(c) === index
     ).slice(0, 5);
-
     setHistory(updatedHistory);
     localStorage.setItem("weatherHistory", JSON.stringify(updatedHistory));
   };
-
   return (
     <div className="flex items-center w-full">
       <input
@@ -36,5 +32,4 @@ const SearchBar = ({ city, setCity, fetchWeather }) => {
     </div>
   );
 };
-
 export default SearchBar;
