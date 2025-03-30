@@ -27,12 +27,11 @@ const Home = () => {
     setError("");
   
     try {
-      // Fetch current weather
+
       const weatherResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(selectedCity)},IN&units=metric&appid=${API_KEY}`
       );
 
-      // Fetch 5-day forecast
       const forecastResponse = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(selectedCity)},IN&units=metric&appid=${API_KEY}`
       );
@@ -43,11 +42,9 @@ const Home = () => {
 
       setWeather(weatherResponse.data);
 
-      // Filter forecast data to get one entry per day
       const dailyForecast = forecastResponse.data.list.filter((_, index) => index % 8 === 0);
       setForecast(dailyForecast);
 
-      // Update search history
       const updatedHistory = [selectedCity, ...searchHistory.filter((c) => c !== selectedCity)].slice(0, 5);
       setSearchHistory(updatedHistory);
       localStorage.setItem("weatherHistory", JSON.stringify(updatedHistory));
