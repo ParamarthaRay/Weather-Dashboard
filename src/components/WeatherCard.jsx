@@ -1,14 +1,11 @@
 import { WiDaySunny, WiMoonAltWaxingCrescent4, WiSunset } from "react-icons/wi";
-
 const WeatherCard = ({ weather, forecast }) => {
   const { name, main, weather: weatherInfo, wind, sys, dt, timezone } = weather;
   const weatherCondition = weatherInfo[0].main;
   const weatherIcon = `http://openweathermap.org/img/wn/${weatherInfo[0].icon}@2x.png`;
-
   const currentTime = new Date((dt + timezone) * 1000).getUTCHours();
   const sunriseTime = new Date((sys.sunrise + timezone) * 1000).getUTCHours();
   const sunsetTime = new Date((sys.sunset + timezone) * 1000).getUTCHours();
-
   let timeOfDayIcon;
   if (currentTime >= sunriseTime && currentTime < sunsetTime - 2) {
     timeOfDayIcon = <WiDaySunny className="text-yellow-500 text-6xl" />;
@@ -17,7 +14,6 @@ const WeatherCard = ({ weather, forecast }) => {
   } else {
     timeOfDayIcon = <WiMoonAltWaxingCrescent4 className="text-blue-500 text-6xl" />;
   }
-
   return (
     <div className="flex flex-col items-center justify-center w-96 p-6 mt-6 rounded-lg shadow-lg 
                     bg-rose-200 text-black border-4 border-aquagreen-400 m-4 
@@ -30,8 +26,6 @@ const WeatherCard = ({ weather, forecast }) => {
       <p className="text-4xl font-semibold">{main.temp}°C</p>
       <p>Humidity: {main.humidity}%</p>
       <p>Wind Speed: {wind.speed} km/h</p>
-
-      {/* 5-Day Forecast Section */}
       {forecast && (
         <div className="mt-6 w-full">
           <h3 className="text-lg font-semibold mb-2 text-center">5-Day Forecast</h3>
@@ -53,5 +47,4 @@ const WeatherCard = ({ weather, forecast }) => {
     </div>
   );
 };
-
 export default WeatherCard;
