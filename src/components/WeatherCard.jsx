@@ -21,7 +21,7 @@ const WeatherCard = ({ weather }) => {
   return (
     <div
       className="flex flex-col items-center justify-center w-96 p-6 mt-6 rounded-lg shadow-lg transition-all duration-500
-                 bg-rose-300 text-black border-4 border-aquagreen-400 m-4 hover:scale-105 transform"
+                 bg-rose-200 text-black border-4 border-aquagreen-400 m-4 hover:scale-105 transform"
     >
       <h2 className="text-2xl font-bold">{name}</h2>
       {timeOfDayIcon}
